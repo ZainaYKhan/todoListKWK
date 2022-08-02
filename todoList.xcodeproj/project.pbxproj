@@ -70,12 +70,12 @@
 				6765EBAD2898AA9C0045B221 /* SceneDelegate.swift */,
 				6765EBAF2898AA9C0045B221 /* ViewController.swift */,
 				6765EBB12898AA9C0045B221 /* Main.storyboard */,
-				6765EBC22898AEA30045B221 /* To-DoTableViewController.swift */,
 				6765EBB72898AA9F0045B221 /* Assets.xcassets */,
 				6765EBB92898AA9F0045B221 /* LaunchScreen.storyboard */,
 				6765EBBC2898AA9F0045B221 /* Info.plist */,
 				6765EBB42898AA9D0045B221 /* todoList.xcdatamodeld */,
 				6765EBC42898AF250045B221 /* ToDo.swift */,
+				6765EBC22898AEA30045B221 /* To-DoTableViewController.swift */,
 				67C41C8128996D2000C9BC81 /* addToDoViewController.swift */,
 				67C41C832899722E00C9BC81 /* completeToDoViewController.swift */,
 			);

@@ -8,23 +8,25 @@
 import UIKit
 
 class To_DoTableViewController: UITableViewController {
-    var toDos: [ToDo] = []
+    var toDos: [ToDoCD] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        toDos = createsToDos()
+        getToDos()
 
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+            getToDos()
+    }
 
-    func createsToDos() ->[ToDo]{
-        let swift = ToDo()
-        swift.name = "Learn Swift"
-        swift.important = true
-        
-        let dog = ToDo()
-        dog.name = "walk the dog"
-        
-        return [swift, dog]
+    func getToDos(){
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext{
+            if let coreDataToDos = try? context.fetch(ToDoCD.fetchRequest()) as? [ToDoCD] {
+                toDos = coreDataToDos
+                tableView.reloadData()
+            }
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -44,10 +46,10 @@ class To_DoTableViewController: UITableViewController {
         let toDo = toDos[indexPath.row]
         
         if toDo.important {
-            cell.textLabel?.text = "!!!" + toDo.name
+            cell.textLabel?.text = "!!!" + (toDo.name ?? "failed to load item")
         }
         else{
-        cell.textLabel?.text = "⬇️" + toDo.name
+            cell.textLabel?.text = "⬇️" + (toDo.name ?? "failed to load item")
             
         }
         return cell
@@ -102,7 +104,7 @@ class To_DoTableViewController: UITableViewController {
         }
         
         if let completeVC = segue.destination as? completeToDoViewController{
-            if let toDo  = sender as? ToDo{
+            if let toDo  = sender as? ToDoCD{
                 completeVC.selectedToDo = toDo
                 completeVC.previousVC = self
             }

@@ -9,16 +9,24 @@ import UIKit
 
 class completeToDoViewController: UIViewController {
     var previousVC = To_DoTableViewController()
-    var selectedToDo = ToDo()
+    var selectedToDo : ToDoCD?
     @IBOutlet weak var titleLable: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        titleLable.text = selectedToDo.name
+        titleLable.text = selectedToDo?.name
     }
     
     @IBAction func tappedComplete(_ sender: Any) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
+            return
+        }
+        let context = appDelegate.persistentContainer.viewContext
+        if let theToDo = selectedToDo{
+            context.delete(theToDo)
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     /*
